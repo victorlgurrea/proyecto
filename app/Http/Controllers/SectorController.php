@@ -106,7 +106,8 @@ class SectorController extends Controller
         $sector_name = Sector::where('id', $id)->first()->name;
        
         return view('partials.delete_modal', [
-            'rute' => "route('sectors.destroy', " . $sector_id. ")", 
+            'rute' => 'sectors.destroy',
+            'id'   => $sector_id,
             'name' => $sector_name,
         ]);
         

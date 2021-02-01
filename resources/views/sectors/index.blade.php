@@ -37,7 +37,7 @@
                                     <a class="btn btn-primary btn-sm" href="{{ route('sectors.edit',$sector->id) }}" title="editar"><i class="fas fa-pen"></i></a>
                                 </div>
                                 <div class="col-4">
-                                    <a data-toggle="modal" class="btn btn-danger btn-sm" id="smallButton" data-target="#smallModal" data-action="delete" data-id="{{ $sector->id }}" title="eliminar">
+                                    <a data-toggle="modal" class="btn btn-danger btn-sm" id="deleteButton" data-target="#deleteModal" data-action="sectors/delete/{{ $sector->id }}" title="eliminar">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -63,7 +63,7 @@
         </div>
 
         <!-- small modal -->
-        <div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -72,7 +72,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" id="smallBody">
+                    <div class="modal-body" id="deleteBody">
                     </div>
                 </div>
             </div>
@@ -83,17 +83,17 @@
 @section('javascript_page')
 <script>
     // display a modal (small modal)
-    $(document).on('click', '#smallButton', function(event) {
+    $(document).on('click', '#deleteButton', function(event) {
         event.preventDefault();
-        let url = "sectors/" + $(this).attr('data-action') + "/" + $(this).attr('data-id');
+        let url = $(this).attr('data-action');
         $.ajax({
             url: url
             , beforeSend: function() {
             },
             // return the result
             success: function(result) {
-                $('#smallModal').modal("show");
-                $('#smallBody').html(result);
+                $('#deleteModal').modal("show");
+                $('#deleteBody').html(result);
             }
             , complete: function() {
               

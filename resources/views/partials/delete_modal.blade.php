@@ -1,4 +1,4 @@
-<form action="{{ $rute }}" method="POST">
+<form action="{{ route($rute, $id) }}" method="POST">
     <div class="modal-body">
         @csrf
         @method('DELETE')
