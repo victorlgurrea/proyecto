@@ -116,6 +116,12 @@
                         <span>Sectores
                         </span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('roles.index') }}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Roles
+                        </span></a>
+                </li>
             @elseif(Auth::user()->hasRole('Usuario'))
                 <li class="nav-item">
                         <a class="nav-link" href="tables.html">

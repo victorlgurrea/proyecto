@@ -11,8 +11,8 @@
 <div class="card mt-5">
          <div class="card-header">
             <div class="col-md-12">
-                <h4 class="card-title"><strong>Sectores</strong>
-                  <a class="btn btn-success float-right" href="{{ route('sectors.create') }}" id="createNewSector">Crear Nuevo Sector</a>
+                <h4 class="card-title"><strong>Roles</strong>
+                  <a class="btn btn-success float-right" href="{{ route('roles.create') }}" id="createNewRole">Crear Nuevo Rol</a>
                 </h4>
             </div>
          </div>
@@ -25,7 +25,7 @@
                 </button>
                 </div>
             @endif
-            <table id="sectors" class="table table-striped table-bordered" style="width:100%;">
+            <table id="roles" class="table table-striped table-bordered" style="width:100%;">
                     <thead>
                         <tr>
                             <th class="text-center">Nombre</th>
@@ -33,9 +33,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($sectors as $sector)
+                        @foreach ($roles as $rol)
                         <tr>
-                            <td>{{ $sector->name }}</td>
+                            <td>{{ $rol->name }}</td>
                             <td class="text-center">
                                     <div class="row">
                                         <div class="col-12">
@@ -44,10 +44,10 @@
                                                     Acciones
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item btn btn-default" href="{{ route('sectors.edit',$sector->id) }}" title="editar">
+                                                    <a class="dropdown-item btn btn-default" href="{{ route('roles.edit',$rol->id) }}" title="editar">
                                                         Editar
                                                     </a>
-                                                    <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="sectors/delete/{{ $sector->id }}" title="eliminar">
+                                                    <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="roles/delete/{{ $rol->id }}" title="eliminar">
                                                         Eliminar
                                                     </a>
                                                 </div>
@@ -86,7 +86,7 @@
 <script type="text/javascript">
     // display a modal (small modal)
     $(document).ready(function() {
-        $("#sectors").DataTable({
+        $("#roles").DataTable({
             language: {
                 url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -104,11 +104,8 @@
                 },
                 // return the result
                 success: function(result) {
-                    $('#deleteModal').show();
+                    $("#deleteBody").html("");
                     $('#deleteBody').html(result);
-                }
-                , complete: function() {
-                
                 }
             })
         });

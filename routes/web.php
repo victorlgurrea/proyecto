@@ -26,4 +26,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'verified'], function()
    // Route::get('dashboard', function() {} );
    Route::resource('sectors','SectorController');
    Route::get('sectors/delete/{id}', 'SectorController@delete');
+   
+   Route::resource('roles','RoleController');
+   Route::get('roles/delete/{id}', 'RoleController@delete');
 });

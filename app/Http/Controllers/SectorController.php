@@ -14,9 +14,9 @@ class SectorController extends Controller
      */
     public function index()
     {
-        $sectors = Sector::paginate(10);
+        $sectors = Sector::all();
 
-        return view('sectors.index', compact('sectors'));
+        return view('sectors.index', ['sectors' => $sectors]);
     }
 
     /**
@@ -104,11 +104,14 @@ class SectorController extends Controller
     {
         $sector_id = Sector::where('id', $id)->first()->id;
         $sector_name = Sector::where('id', $id)->first()->name;
+        $visible = "";
        
         return view('partials.delete_modal', [
             'rute' => 'sectors.destroy',
             'id'   => $sector_id,
             'name' => $sector_name,
+            'visible' => $visible,
+            'message' => '',
         ]);
         
     }
