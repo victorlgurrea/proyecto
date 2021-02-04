@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder
         $user->surname = 'Prueba';
         $user->phone = '666666666';
         $user->email = 'usuarioprueba@example.com';
+        $user->email_verified_at = date("Y-m-d H:i:s");
         $user->password = bcrypt('123456');
         $user->save();
         $user->roles()->attach($role_user);
@@ -29,8 +30,10 @@ class UserTableSeeder extends Seeder
         $user->surname = 'Prueba';
         $user->phone = '777777777';
         $user->email = 'administradorprueba@example.com';
+        $user->email_verified_at = date("Y-m-d H:i:s");
         $user->password = bcrypt('123456');
         $user->save();
         $user->roles()->attach($role_admin);
+
     }
 }

@@ -2,7 +2,7 @@
     <div class="modal-body">
         @csrf
         @method('DELETE')
-        <h5 class="text-center">Esta seguro de eliminar el registro  {{$name}}?</h5>
+        <h5 class="text-center">Esta seguro de eliminar el registro  '{{$name}}' ?</h5>
         <p  class="text-center">{{ $message }}</p>
     </div>
     <div class="modal-footer">

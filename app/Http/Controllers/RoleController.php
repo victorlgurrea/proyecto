@@ -115,7 +115,7 @@ class RoleController extends Controller
         $roles_user = DB::table('role_user')->where('role_id', $role_id)->count();
         
         $visible = ($roles_user > 0 ) ? 'invisible' : '';
-        $message = ($roles_user > 0 ) ? 'El rol tiene usuarios asociados, no puede ser eliminado el registro' : '';
+        $message = ($roles_user > 0 ) ? 'Hay usuarios que tienen asociado este rol, elimine primero dichos usuarios para poder eliminar este rol' : '';
 
 
         return view('partials.delete_modal', [

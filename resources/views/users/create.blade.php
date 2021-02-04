@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 
+
 @section('stylesheets')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 @endsection 
@@ -13,7 +14,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('users.store') }}">
                         @csrf
 
                         <div class="form-group row">

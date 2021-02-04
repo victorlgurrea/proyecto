@@ -29,4 +29,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'verified'], function()
    
    Route::resource('roles','RoleController');
    Route::get('roles/delete/{id}', 'RoleController@delete');
+
+   Route::resource('users','UserController');
+   Route::get('users/delete/{id}', 'UserController@delete');
 });
