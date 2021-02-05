@@ -85,6 +85,28 @@
         </div>
     </li>
 
+    <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="idiomDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="img-profile rounded-circle" title="seleccione idioma"
+                src="{{ asset('img/idiom.jpg') }}" >
+        </a>
+        <!-- Dropdown - User Information -->
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            aria-labelledby="idiomDropdown">
+            <a class="dropdown-item" href="#">
+                <img class="img-profile rounded-circle" title="seleccione idioma"
+                src="{{ asset('img/spanish.png') }}" widht="15px" height="15px;">
+                spanish
+            </a>
+            <a class="dropdown-item" href="#">
+                <img class="img-profile rounded-circle" title="seleccione idioma"
+                    src="{{ asset('img/english.png') }}" widht="15px" height="15px;">
+                    english
+            </a>
+        </div>
+    </li>
+
 </ul>
 
 </nav>

@@ -104,7 +104,17 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::where('id', $id)->firstOrFail();
+        $roles = Role::orderBy('name','desc')->get();
+        $roles_user = DB::table('role_user')->where("user_id", $id)->get();
+  
+        $array_roles = [];
+        foreach ($roles_user as $rol) {
+            $rol_name = DB::table('roles')->where('id', $rol->role_id)->first();
+            array_push($array_roles, $rol_name->name);
+        }
+
+        return view('users.edit',['user'=>$user, 'roles' => $roles, 'array_roles' => $array_roles]);
     }
 
     /**
@@ -116,7 +126,34 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $user = DB::table('users')->where('id', $id)->first();
+      
+        //controlamos que el usuario tengo roles asociados en la tabla pivote
+        $count_roles = DB::table('role_user')->where("user_id", $id)->count();
+
+        // si tiene roles asociadolos los eliminamos primero
+        if($count_roles > 0) {
+            $remove_roles_user = DB::table('role_user')->where("user_id", $id)->delete();
+        }
+
+        //le añadimos los roles que vengan ahora en el post en la tabla pivote
+        if($remove_roles_user) {
+            foreach($input['roles'] as $rol) {
+                $rol = Role::where('name', $rol)->first();
+                $insert_role = DB::table('role_user')->insert(['role_id' => $rol->id, 'user_id' => $user->id, 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")]);
+            }
+        }
+
+        //Ahora actualizamos los datos del usuario 
+        $affected_user = DB::table('users')->where('id', $user->id)->update([
+            'name'    => $input['name'],
+            'surname' => $input['surname'],
+            'email'   => $input['email'],
+            'phone'   => $input['phone'],
+        ]);
+        
+        return ($affected_user) ? redirect()->route('users.index')->with('success','Usuario editado correctamente') : redirect()->route('users.index')->with('error','Usuario no se ha editado');
     }
 
     /**
