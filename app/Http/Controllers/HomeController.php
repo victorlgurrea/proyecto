@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Session;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Role;
+
 
 class HomeController extends Controller
 {

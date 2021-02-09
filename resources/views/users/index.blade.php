@@ -11,8 +11,8 @@
 <div class="card mt-5">
          <div class="card-header">
             <div class="col-md-12">
-                <h4 class="card-title"><strong>Usuarios</strong>
-                 <a class="btn btn-success float-right" href="{{ route('users.create') }}" id="createNewUser">Crear nuevo usuario</a>
+                <h4 class="card-title"><strong>{{__('users')}}</strong>
+                 <a class="btn btn-success float-right" href="{{ route('users.create') }}" id="createNewUser">{{__('create_user')}}</a>
                 </h4>
             </div>
          </div>

@@ -12,7 +12,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title"><strong>{{ __('messages.edit_register') }}</strong>  
+                    <h4 class="card-title"><strong>{{ __('edit_register') }}</strong>  
                         <a class="btn btn-success ml-5 float-right" href="{{ route('users.index') }}">Volver</a>
                     </h4>
                 </div>

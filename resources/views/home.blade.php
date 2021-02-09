@@ -15,6 +15,7 @@
                         </div>
                     @endif
                     @if(Auth::user())
+                        <p>{{ __('welcome',['Name' => auth()->user()->name . " " . auth()->user()->surname] )}}</p>
                         <div>Acceso como :
                             <ul style="list-style-type: none;">
                                 @foreach($roles_array as $rol)

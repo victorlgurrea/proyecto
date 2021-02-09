@@ -123,9 +123,15 @@
                         </span></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('langs.index') }}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>{{__('translates')}}
+                        </span></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('users.index') }}">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Usuarios
+                        <span>{{__('users')}}
                         </span></a>
                 </li>
             @elseif(Auth::user()->hasRole('Usuario'))
