@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class LangController extends Controller
 {
@@ -80,5 +81,35 @@ class LangController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function translate(Request $request)
+    {
+        $languages = config('app.languages');
+
+        $input = $request->all();
+
+        $tr = new GoogleTranslate();
+        $tr->setSource('es');
+        $data = [];
+
+        foreach ($languages as $lang) {
+            $tr->setTarget($lang);
+            $data[$lang] = $tr->translate($input['word']);
+        }
+
+        return $data;
+    }
+
+    public function save_translate(Request $request)
+    {
+        
+        $input = $request->all();
+        
+        $languages = config('app.languages');
+
+        foreach($languages as $lang) {
+            
+        }
     }
 }

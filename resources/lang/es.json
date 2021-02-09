@@ -6,5 +6,7 @@
     "roles" : "Roles",
     "translates" : "Traducciones",
     "add_translation" : "Añadir traducción",
-    "close" : "Cerrar"
+    "close" : "Cerrar",
+    "translate_from_spanish" : "Traducir desde el español",
+    "save" : "Guardar"
 }

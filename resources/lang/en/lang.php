@@ -8,4 +8,6 @@ return [
     'translates' => "Translates",
     'add_translation' => "Add translation",
     'close' => "Close",
+    "translate_from_spanish" => "Translate from Spanish",
+    "save" => "Save",
 ];

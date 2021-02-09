@@ -38,4 +38,6 @@ Route::group(['prefix' => 'admin',  'middleware' => ['verified']], function()
    Route::get('/lang/{lang}', 'LocalizationController@lang_change');
 
    Route::resource('langs','LangController');
+   Route::post('langs/translate','LangController@translate')->name('translate');
+   Route::post('langs/savetranslate','LangController@save_translate')->name('saveTranslate');
 });

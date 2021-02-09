@@ -82,6 +82,19 @@ return [
 
     'locale' => 'es',
 
+        /*
+    |--------------------------------------------------------------------------
+    | Application Languages Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application languages determines the default languages that will be used
+    | by the translation service provider. You are free to set this value
+    | to any of the locales which will be supported by the application.
+    |
+    */
+
+    'languages' => ['es','fr','de','it','en','ru','pt'],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

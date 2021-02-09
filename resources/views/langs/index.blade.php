@@ -38,39 +38,73 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-6 offset-3">
-                                <div class="form-group">
-                                    <label for="name">Key: </label>
-                                    <input type="text" class="form-control" id="key" name="key" value="" required>
+                    <form method="POST" action="{{ route('saveTranslate') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 offset-3">
+                                    <div class="form-group">
+                                        <label for="name">Key: </label>
+                                        <input type="text" class="form-control" id="key" name="key" value="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="es">Español: </label>
+                                        <input type="text" class="form-control" id="es" name="es" value="" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="en">Inglés: </label>
+                                        <input type="text" class="form-control" id="en" name="en" value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fr">Frances: </label>
+                                        <input type="text" class="form-control" id="fr" name="fr" value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="de">Alemán </label>
+                                        <input type="text" class="form-control" id="de" name="de" value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="it">Italiano: </label>
+                                        <input type="text" class="form-control" id="it" name="it" value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="ru">Ruso: </label>
+                                        <input type="text" class="form-control" id="ru" name="ru" value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="pt">Portuges: </label>
+                                        <input type="text" class="form-control" id="pt" name="pt" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 offset-3 text-center">
+                                    <button class="btn btn-warning" id="translate">{{__('translate_from_spanish')}}</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="es">Español: </label>
-                                    <input type="text" class="form-control" id="es" name="es" value="" required>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="en">Inglés: </label>
-                                    <input type="text" class="form-control" id="en" name="en" value="">
-                                </div>
-                            </div>
+                        <div class="modal-footer">
+                            <meta id="csrf-token" name="csrf-token" content="{{ csrf_token() }}" />
+                            <button type="submit" class="btn btn-primary">{{__('save')}}</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('close')}}</button>
                         </div>
-                        <div class="row">
-                            <div class="col-6 offset-3 text-center">
-                                <button class="btn btn-warning" id="translateAir">Traducir desde el español</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('close')}}</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -99,7 +133,38 @@
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    
+        $(document).on('click', '#translate', function(event) {
+            event.preventDefault();
+            let url = "{{ route('translate')}}";
+            let word = $("#es").val();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    word:word,
+                },
+                
+                beforeSend: function() {
+                   
+                },
+                // return the result
+                success: function(data) {
+                    //console.log(data);
+                    let languages = data.languages;
+                    $.each(data,function(key,value){
+                       $("#"+key).val(value);
+                    })
+                
+                }
+            })
+        });
+
 </script>
 @endsection

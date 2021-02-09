@@ -8,4 +8,6 @@ return [
     'translates' => "Traducciones",
     'add_translation' => "Añadir traducción",
     'close' => "Cerrar",
+    "translate_from_spanish" => "Traducir desde el español",
+    "save" => "Guardar"
 ];
