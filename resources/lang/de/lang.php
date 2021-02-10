@@ -48,6 +48,7 @@ return
 	"sector_remove_success" => "Sektor erfolgreich entfernt",
 	"sector_updated_success" => "Sektor erfolgreich aktualisiert.",
 	"sectors" => "Sektoren",
+	"select_language" => "Wähle eine Sprache",
 	"spanish" => "Spanisch",
 	"success_translate" => "Erfolg beim Hinzufügen von Übersetzungen",
 	"surname" => "Nachname",

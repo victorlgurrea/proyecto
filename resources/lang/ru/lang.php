@@ -48,6 +48,7 @@ return
 	"sector_remove_success" => "Сектор успешно удален",
 	"sector_updated_success" => "Сектор успешно обновлен.",
 	"sectors" => "Секторов",
+	"select_language" => "Выберите язык",
 	"spanish" => "испанский",
 	"success_translate" => "Успешное добавление перевода",
 	"surname" => "Фамилия",

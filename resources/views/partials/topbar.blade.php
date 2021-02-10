@@ -97,7 +97,7 @@
 
             @foreach (Config::get('app.languages') as $lang => $language)
                 <a class="dropdown-item" href="{{route('lang_change', $language)}}">
-                    <img class="img-profile rounded-circle" title="seleccione idioma"
+                    <img class="img-profile rounded-circle" title="{{__('select_language')}}"
                     src="{{URL::asset('img/' . $language . '.png')}}" widht="15px" height="15px;">
                     @switch($language)
                         @case('en')
