@@ -44,7 +44,7 @@ class RoleController extends Controller
   
         Role::create($request->all());
    
-        return redirect()->route('roles.index')->with('success','Rol creado correctamente.');
+        return redirect()->route('roles.index')->with('success',__('role_created_success'));
     }
 
     /**
@@ -87,7 +87,7 @@ class RoleController extends Controller
 
         $affected = DB::table('roles')->where('id', $input['id'])->update(['name' => $input['name']]);
   
-        return ($affected) ? redirect()->route('roles.index')->with('success','Rol actualizado correctamente') : redirect()->route('roles.index')->with('error','Rol no actualizado');
+        return ($affected) ? redirect()->route('roles.index')->with('success',__('role_updated_success')) : redirect()->route('roles.index')->with('error',__('error_rol_updated'));
     }
 
      /**
@@ -103,7 +103,7 @@ class RoleController extends Controller
         $remove = DB::table('roles')->where("id", $request->id)->delete();
         
         
-        return ($remove) ? redirect()->route('roles.index')->with('success','Rol eliminado correctamente') : redirect()->route('roles.index')->with('error','Rol no se ha podido eliminar');
+        return ($remove) ? redirect()->route('roles.index')->with('success',__('role_removed_success')) : redirect()->route('roles.index')->with('error',__('role_removed_error'));
     
     }
 
@@ -115,7 +115,7 @@ class RoleController extends Controller
         $roles_user = DB::table('role_user')->where('role_id', $role_id)->count();
         
         $visible = ($roles_user > 0 ) ? 'invisible' : '';
-        $message = ($roles_user > 0 ) ? 'Hay usuarios que tienen asociado este rol, elimine primero dichos usuarios para poder eliminar este rol' : '';
+        $message = ($roles_user > 0 ) ? __('role_info_dependence') : '';
 
 
         return view('partials.delete_modal', [

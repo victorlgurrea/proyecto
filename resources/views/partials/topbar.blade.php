@@ -10,7 +10,7 @@
 <form
     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
     <div class="input-group">
-        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+        <input type="text" class="form-control bg-light border-0 small" placeholder="{{__('search')}}"
             aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
             <button class="btn btn-primary" type="button">
@@ -35,7 +35,7 @@
             <form class="form-inline mr-auto w-100 navbar-search">
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small"
-                        placeholder="Search for..." aria-label="Search"
+                        placeholder="{{__('search')}}" aria-label="Search"
                         aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
@@ -88,34 +88,46 @@
     <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="idiomDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" language = "{{ session()->get('locale') }}">
-                @switch(app()->getLocale())
-                    @case('en')
-                    <img class="img-profile rounded-circle" title="seleccione idioma" src="{{ asset('img/english.png') }}" >
-                    @break
-                    @case('es')
-                    <img class="img-profile rounded-circle" title="seleccione idioma" src="{{ asset('img/spanish.png') }}" >
-                    @break
-                @endswitch
+            <img class="img-profile rounded-circle" title="seleccione idioma" src="{{URL::asset('img/' . session()->get('locale') . '.png')}}" >
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="idiomDropdown">
 
-            <a class="dropdown-item" href="lang/es">
-                <img class="img-profile rounded-circle" title="seleccione idioma"
-                src="{{ asset('img/spanish.png') }}" widht="15px" height="15px;">
-                spanish
-            </a>
-            <a class="dropdown-item" href="lang/en">
-                <img class="img-profile rounded-circle" title="seleccione idioma"
-                src="{{ asset('img/english.png') }}" widht="15px" height="15px;">
-                english
-            </a>
-        
+            @foreach (Config::get('app.languages') as $lang => $language)
+                <a class="dropdown-item" href="{{route('lang_change', $language)}}">
+                    <img class="img-profile rounded-circle" title="seleccione idioma"
+                    src="{{URL::asset('img/' . $language . '.png')}}" widht="15px" height="15px;">
+                    @switch($language)
+                        @case('en')
+                         {{__('english')}}
+                         @break
+                         @case('es')
+                         {{__('spanish')}}
+                         @break
+                         @case('de')
+                         {{__('german')}}
+                         @break
+                         @case('it')
+                         {{__('italian')}}
+                         @break
+                         @case('fr')
+                         {{__('french')}}
+                         @break
+                         @case('pt')
+                         {{__('portuguese')}}
+                         @break
+                         @case('ru')
+                         {{__('russian')}}
+                         @break
+                         @case('ca')
+                         {{__('valencian')}}
+                         @break                         
+                    @endswitch
+                </a>
+            @endforeach
         </div>
     </li>
-
 </ul>
-
 </nav>
 <!-- End of Topbar -->

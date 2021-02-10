@@ -21,9 +21,9 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/lang/{lang}', 'LocalizationController@lang_change');
+Route::get('/lang/{lang}', 'LocalizationController@lang_change')->name('lang_change');
 
-Route::group(['prefix' => 'admin',  'middleware' => ['verified']], function()
+Route::group(['middleware' => ['verified']], function()
 {
     //All the routes that belongs to the group goes here
    // Route::get('dashboard', function() {} );
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin',  'middleware' => ['verified']], function()
 
    Route::resource('users','UserController');
    Route::get('users/delete/{id}', 'UserController@delete');
-   Route::get('/lang/{lang}', 'LocalizationController@lang_change');
+   //Route::get('/lang/{lang}', 'LocalizationController@lang_change');
 
    Route::resource('langs','LangController');
    Route::post('langs/translate','LangController@translate')->name('translate');

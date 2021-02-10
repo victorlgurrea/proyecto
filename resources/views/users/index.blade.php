@@ -28,12 +28,12 @@
             <table id="users" class="table table-striped table-bordered" style="width:100%;">
                     <thead>
                         <tr>
-                            <th class="text-center">Nombre</th>
-                            <th class="text-center">Apellido</th>
-                            <th class="text-center">Telefono</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">Roles</th>
-                            <th width="10%" class="text-center">Acciones</th>
+                            <th class="text-center">{{__('name')}}</th>
+                            <th class="text-center">{{__('surname')}}</th>
+                            <th class="text-center">{{__('phone')}}</th>
+                            <th class="text-center">{{__('email')}}</th>
+                            <th class="text-center">{{__('roles')}}</th>
+                            <th width="10%" class="text-center">{{__('actions')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,14 +49,14 @@
                                         <div class="col-12">
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Acciones
+                                                    {{__('actions')}}
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item btn btn-default" href="{{ route('users.edit',$user->id) }}" title="editar">
-                                                        Editar
+                                                    <a class="dropdown-item btn btn-default" href="{{ route('users.edit',$user->id) }}" title="{{__('edit')}}">
+                                                        {{__('edit')}}
                                                     </a>
-                                                    <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="users/delete/{{ $user->id }}" title="eliminar">
-                                                        Eliminar
+                                                    <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="users/delete/{{ $user->id }}" title="{{__('remove')}}">
+                                                        {{__('remove')}}
                                                     </a>
                                                 </div>
                                             </div>
@@ -73,7 +73,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Eliminar registro</h5>
+                        <h5 class="modal-title">{{__('delete_record')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -96,7 +96,7 @@
     $(document).ready(function() {
         $("#users").DataTable({
             language: {
-                url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.22/i18n/" + $('html').attr('language')+ ".json"
             },
             pageLength:5,
         });

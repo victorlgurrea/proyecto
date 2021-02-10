@@ -5,15 +5,15 @@
 <div class="card mt-5">
          <div class="card-header">
             <div class="col-md-12">
-                <h4 class="card-title"><strong>Crear Rol</strong>  
-                  <a class="btn btn-success ml-5 float-right" href="{{ route('roles.index') }}">Volver</a>
+                <h4 class="card-title"><strong>{{__('create_rol')}}</strong>  
+                  <a class="btn btn-success ml-5 float-right" href="{{ route('roles.index') }}">{{__('return')}}</a>
                 </h4>
             </div>
          </div>
          <div class="card-body">
            @if ($errors->any())
                 <div class="alert alert-danger">
-                    <strong>Error!</strong> Se ha producido un error.<br><br>
+                    <strong>{{__('error')}}!</strong> {{__('error_ocurred')}}<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -28,13 +28,13 @@
                 <div class="row">
                     <div class="col-6 offset-3">
                         <div class="form-group">
-                            <label for="name">Nombre: </label>
+                            <label for="name">{{__('name')}}: </label>
                             <input type="text" class="form-control" id="name" name="name" value="">
                         </div>
                     </div>
             
                     <div class="col-6 offset-3 text-center">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">{{__('save')}}</button>
                     </div>
                 </div>
             </form>

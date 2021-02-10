@@ -11,8 +11,8 @@
 <div class="card mt-5">
          <div class="card-header">
             <div class="col-md-12">
-                <h4 class="card-title"><strong>Roles</strong>
-                  <a class="btn btn-success float-right" href="{{ route('roles.create') }}" id="createNewRole">Crear Nuevo Rol</a>
+                <h4 class="card-title"><strong>{{__('roles')}}</strong>
+                  <a class="btn btn-success float-right" href="{{ route('roles.create') }}" id="createNewRole">{{__('create_new_rol')}}</a>
                 </h4>
             </div>
          </div>
@@ -25,11 +25,19 @@
                 </button>
                 </div>
             @endif
+            @if ($message = Session::get('error'))
+                <div class="alert alert-error alert-dismissible fade show" role="alert">
+                    <p>{{ $message }}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            @endif
             <table id="roles" class="table table-striped table-bordered" style="width:100%;">
                     <thead>
                         <tr>
-                            <th class="text-center">Nombre</th>
-                            <th width="10%" class="text-center">Acciones</th>
+                            <th class="text-center">{{__('name')}}</th>
+                            <th width="10%" class="text-center">{{__('actions')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,14 +49,14 @@
                                         <div class="col-12">
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Acciones
+                                                    {{__('actions')}}
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item btn btn-default" href="{{ route('roles.edit',$rol->id) }}" title="editar">
-                                                        Editar
+                                                    <a class="dropdown-item btn btn-default" href="{{ route('roles.edit',$rol->id) }}" title="{{__('edit')}}">
+                                                        {{__('edit')}}
                                                     </a>
                                                     <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="roles/delete/{{ $rol->id }}" title="eliminar">
-                                                        Eliminar
+                                                        {{__('remove')}}
                                                     </a>
                                                 </div>
                                             </div>
@@ -65,7 +73,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Eliminar registro</h5>
+                        <h5 class="modal-title">{{__('delete_record')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -88,7 +96,7 @@
     $(document).ready(function() {
         $("#roles").DataTable({
             language: {
-                url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.22/i18n/" + $('html').attr('language')+ ".json"
             },
             pageLength:5,
         });

@@ -2,12 +2,12 @@
     <div class="modal-body">
         @csrf
         @method('DELETE')
-        <h5 class="text-center">Esta seguro de eliminar el registro  '{{$name}}' ?</h5>
+        <h5 class="text-center">{{ __('ask_delete_record', ['Name' => $name ])}}  ?</h5>
         <p  class="text-center">{{ $message }}</p>
     </div>
     <div class="modal-footer">
         <input type="text" name="id" id="id" value="{{ $id }}" class="invisible">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-danger {{ $visible }}">Eliminar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('cancel')}}</button>
+        <button type="submit" class="btn btn-danger {{ $visible }}">{{ __('remove') }}</button>
     </div>
 </form>

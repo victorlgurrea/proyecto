@@ -2,6 +2,7 @@
 @extends('layouts.dashboard')
 
 @section('stylesheets')
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endsection
@@ -17,7 +18,7 @@
             </div>
          </div>
          <div class="card-body">
-            @if ($message = Session::get('success'))
+         @if ($message = Session::get('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <p>{{ $message }}</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,6 +27,14 @@
                 </div>
             @endif
 
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p>{{ $message }}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            @endif
         </div>
 
 
@@ -33,7 +42,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{__('lang.add_translation')}}</h5>
+                        <h5 class="modal-title">{{__('add_translation')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -44,7 +53,7 @@
                             <div class="row">
                                 <div class="col-6 offset-3">
                                     <div class="form-group">
-                                        <label for="name">Key: </label>
+                                        <label for="name">Key:</label>   <a href="#" data-toggle="popover" class="float-right" title="{{__('key_information')}}" data-content="{{__('key_info_popover')}}"><i class="fas fa-question"></i></a>
                                         <input type="text" class="form-control" id="key" name="key" value="" required>
                                     </div>
                                 </div>
@@ -92,6 +101,12 @@
                                         <input type="text" class="form-control" id="pt" name="pt" value="">
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="pt">Valenciano: </label>
+                                        <input type="text" class="form-control" id="ca" name="ca" value="">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-6 offset-3 text-center">
@@ -129,10 +144,14 @@
 
 @section('javascript_page')
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('[data-toggle="popover"]').popover();  
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -165,6 +184,6 @@
                 }
             })
         });
-
+});
 </script>
 @endsection

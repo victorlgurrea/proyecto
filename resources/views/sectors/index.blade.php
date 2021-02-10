@@ -11,8 +11,8 @@
 <div class="card mt-5">
          <div class="card-header">
             <div class="col-md-12">
-                <h4 class="card-title"><strong>Sectores</strong>
-                  <a class="btn btn-success float-right" href="{{ route('sectors.create') }}" id="createNewSector">Crear Nuevo Sector</a>
+                <h4 class="card-title"><strong>{{ __('sectors')}}</strong>
+                  <a class="btn btn-success float-right" href="{{ route('sectors.create') }}" id="createNewSector">{{__('create_new_sector')}}</a>
                 </h4>
             </div>
          </div>
@@ -28,8 +28,8 @@
             <table id="sectors" class="table table-striped table-bordered" style="width:100%;">
                     <thead>
                         <tr>
-                            <th class="text-center">Nombre</th>
-                            <th width="10%" class="text-center">Acciones</th>
+                            <th class="text-center">{{__('name')}}</th>
+                            <th width="10%" class="text-center">{{__('actions')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,14 +41,14 @@
                                         <div class="col-12">
                                             <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Acciones
+                                                    {{__('actions')}}
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item btn btn-default" href="{{ route('sectors.edit',$sector->id) }}" title="editar">
-                                                        Editar
+                                                    <a class="dropdown-item btn btn-default" href="{{ route('sectors.edit',$sector->id) }}" title="{{__('edit')}}">
+                                                        {{__('edit')}}
                                                     </a>
-                                                    <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="sectors/delete/{{ $sector->id }}" title="eliminar">
-                                                        Eliminar
+                                                    <a data-toggle="modal" class="dropdown-item btn btn-default" id="deleteButton" data-target="#deleteModal" data-action="sectors/delete/{{ $sector->id }}" title="{{__('remove')}}">
+                                                        {{__('remove')}}
                                                     </a>
                                                 </div>
                                             </div>
@@ -65,7 +65,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Eliminar registro</h5>
+                        <h5 class="modal-title">{{__('delete_record')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -80,18 +80,19 @@
 
 @section('javascript_page')
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
     // display a modal (small modal)
     $(document).ready(function() {
+
         $("#sectors").DataTable({
             language: {
-                url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                url: "//cdn.datatables.net/plug-ins/1.10.22/i18n/" + $('html').attr('language')+ ".json"
             },
             pageLength:5,
         });
+
 
         $(document).on('click', '#deleteButton', function(event) {
             event.preventDefault();

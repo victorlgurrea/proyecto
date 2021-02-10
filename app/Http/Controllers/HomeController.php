@@ -35,7 +35,7 @@ class HomeController extends Controller
         }
         
         return view('home', [
-            'roles_array' => $roles_array,
+            'roles' => implode(",",$roles_array),
             ]);
     }
 }

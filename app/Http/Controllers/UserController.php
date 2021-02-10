@@ -82,7 +82,7 @@ class UserController extends Controller
 
         $user->sendEmailVerificationNotification();
         
-        return redirect()->route('users.index')->with('success','Usuario creado correctamente.');
+        return redirect()->route('users.index')->with('success',__('user_created_success'));
     }
 
     /**
@@ -153,7 +153,7 @@ class UserController extends Controller
             'phone'   => $input['phone'],
         ]);
         
-        return ($affected_user) ? redirect()->route('users.index')->with('success','Usuario editado correctamente') : redirect()->route('users.index')->with('error','Usuario no se ha editado');
+        return ($affected_user) ? redirect()->route('users.index')->with('success',__('user_edited_success')) : redirect()->route('users.index')->with('error',__('user_edited_error'));
     }
 
     /**
@@ -176,12 +176,12 @@ class UserController extends Controller
         
         //Si tienes roles y da problemas eliminar sus roles en la tabla pivote return error eliminando usuario 
         if($count_roles > 0 && ! $remove_roles_user) {
-            return redirect()->route('users.index')->with('error','No se ha podido eliminar los roles asociados al usuario.');
+            return redirect()->route('users.index')->with('error',__('roles_user_removed_error'));
         }
 
         $remove = DB::table('users')->where("id", $input['id'])->delete();
 
-        return ($remove) ? redirect()->route('users.index')->with('success','Usuario eliminado correctamente') : redirect()->route('users.index')->with('error','Usuario no se ha eliminado');
+        return ($remove) ? redirect()->route('users.index')->with('success',__('user_removed_success')) : redirect()->route('users.index')->with('error',__('user_removed_error'));
 
     }
 

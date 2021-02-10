@@ -113,13 +113,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('sectors.index') }}">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Sectores
+                        <span>{{__('sectors')}}
                         </span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('roles.index') }}">
                         <i class="fas fa-fw fa-table"></i>
-                        <span>Roles
+                        <span>{{__('roles')}}
                         </span></a>
                 </li>
                 <li class="nav-item">
