@@ -20,13 +20,14 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('language');
 Route::get('/lang/{lang}', 'LocalizationController@lang_change')->name('lang_change');
 
-Route::group(['middleware' => ['verified']], function()
+Route::group(['middleware' => ['verified','role:Administrador']], function()
 {
     //All the routes that belongs to the group goes here
    // Route::get('dashboard', function() {} );
+
    Route::resource('sectors','SectorController');
    Route::get('sectors/delete/{id}', 'SectorController@delete');
    
@@ -40,4 +41,5 @@ Route::group(['middleware' => ['verified']], function()
    Route::resource('langs','LangController');
    Route::post('langs/translate','LangController@translate')->name('translate');
    Route::post('langs/savetranslate','LangController@save_translate')->name('saveTranslate');
+   
 });
