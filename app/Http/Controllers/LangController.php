@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use File;
+use \stdClass;
 
 class LangController extends Controller
 {
@@ -15,7 +16,28 @@ class LangController extends Controller
      */
     public function index()
     {
-        return view('langs.index');
+        $languages = config('app.languages');
+
+        $array_data = [];
+        $translates = [];
+        foreach($languages as $lang) {
+            $file =  File::getRequire(base_path().'/resources/lang/'.$lang.'/lang.php');
+            foreach($file as $key => $value){
+                $array_data[$key][$lang] = $value;
+            }
+        }
+
+        foreach ($array_data as $key=>$value){
+            $obj = new \stdClass();
+            $obj->key = $key;
+            foreach($value as $val=>$v) {
+                $obj->$val = $v;
+            }
+            array_push($translates, $obj);
+        }
+
+
+        return view('langs.index',['translates' => $translates]);
     }
 
     /**
@@ -53,35 +75,86 @@ class LangController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit_translate(Request $request)
     {
-        //
+        $input = $request->all();
+        $languages = config('app.languages');
+        foreach($languages as $lang) {
+            $file =  File::getRequire(base_path().'/resources/lang/'.$lang.'/lang.php');
+            foreach($file as $key => $value){
+                if($key == $input['key']) {
+                    $array_data[$key][$lang] = $value;
+                }  
+            }
+        }
+
+        foreach ($array_data as $key=>$value){
+            $obj = new \stdClass();
+            $obj->key = $key;
+            foreach($value as $val=>$v) {
+                $obj->$val = $v;
+            }
+        }
+
+        return json_encode($obj);
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $input = $request->all();
+        
+        $languages = config('app.languages');
+
+        foreach($languages as $lang) {
+            //insertar en los json
+            $data = $this->openJSONFile($lang);
+            $data[$input['key']] = $input[$lang];
+            $this->saveJSONFile($lang, $data);
+
+            //insertar en los array
+            $data = $this->openArrayFile($lang);
+            $data[$input['key']] = $input[$lang];
+            $this->saveArrayFile($lang, $data);
+            
+        }
+        return redirect()->route('langs.index')->with('success',__('success_update_translate'));
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $key
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($key)
     {
-        //
+    
+        $languages = config('app.languages');
+
+        foreach($languages as $lang){
+            //eliminar la key de los .json 
+           $file = $this->openJSONFile($lang);
+           unset($file[$key]);
+           $this->saveJSONFile($lang, $file);
+          
+           //eliminar la key de los array lang
+           $file = $this->openArrayFile($lang);
+           unset($file[$key]);
+           $this->saveArrayFile($lang, $file);
+        }
+        return redirect()->route('langs.index')->with('success',__('success_remove_translate'));
     }
 
     public function translate(Request $request)
@@ -198,5 +271,22 @@ class LangController extends Controller
 
         $this->saveJSONFile($request->code, $data);
         return response()->json(['success'=>'Done!']);
+    }
+
+    public function delete_translate($key)
+    {
+
+        $visible = 'visible';
+        $message =  '';
+
+
+        return view('partials.delete_modal', [
+            'rute' => 'langs.destroy',
+            'id'   => $key,
+            'name' => $key,
+            'visible' => $visible,
+            'message' => $message,
+        ]);
+        
     }
 }

@@ -41,5 +41,7 @@ Route::group(['middleware' => ['verified','role:Administrador']], function()
    Route::resource('langs','LangController');
    Route::post('langs/translate','LangController@translate')->name('translate');
    Route::post('langs/savetranslate','LangController@save_translate')->name('saveTranslate');
-   
+   Route::get('langs/delete/{key}','LangController@delete_translate');
+   Route::post('langs/edit','LangController@edit_translate')->name('editTranslate');
+   Route::post('langs/updateTranslate','LangController@update_translate')->name('updateTranslate');
 });
