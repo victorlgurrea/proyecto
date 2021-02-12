@@ -57,6 +57,21 @@
                             <span>{{__('users')}}
                             </span>
                         </a>
+                        <a class="collapse-item" href="{{ route('subscriptions.index') }}">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>{{__('subscription_types')}}
+                            </span>
+                        </a>
+                        <a class="collapse-item" href="{{ route('partners.index') }}">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>{{__('partners_types')}}
+                            </span>
+                        </a>
+                        <a class="collapse-item" href="{{ route('distributors.index') }}">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>{{__('types_of_distributor')}}
+                            </span>
+                        </a>
                     </div>
                 </div>
             </li>

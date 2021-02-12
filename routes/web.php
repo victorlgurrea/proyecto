@@ -44,4 +44,13 @@ Route::group(['middleware' => ['verified','role:Administrador']], function()
    Route::get('langs/delete/{key}','LangController@delete_translate');
    Route::post('langs/edit','LangController@edit_translate')->name('editTranslate');
    Route::post('langs/updateTranslate','LangController@update_translate')->name('updateTranslate');
+
+   Route::resource('subscriptions','SubscriptionController');
+   Route::get('subscriptions/delete/{id}', 'SubscriptionController@delete');
+
+   Route::resource('partners','PartnerController');
+   Route::get('partners/delete/{id}', 'PartnerController@delete');
+
+   Route::resource('distributors','DistributorController');
+   Route::get('distributors/delete/{id}', 'DistributorController@delete');
 });

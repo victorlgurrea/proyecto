@@ -102,7 +102,7 @@
                             <div class="row">
                                 <div class="col-6 offset-3">
                                     <div class="form-group">
-                                        <label for="name">Key:</label>   <a href="" data-toggle="popover" class="float-right" title="{{__('key_information')}}" data-content="{{__('key_info_popover')}}"><i class="fas fa-question"></i></a>
+                                        <label for="name">Key:</label>   <a href="#" data-toggle="popover" class="float-right" title="{{__('key_information')}}" data-content="{{__('key_info_popover')}}"><i class="fas fa-question"></i></a>
                                         <input type="text" class="form-control" id="key" name="key" value="" required>
                                     </div>
                                 </div>
@@ -168,14 +168,13 @@
                         </button>
                     </div>
                     <form method="POST" action="{{ route('updateTranslate') }}">
-                    @method('PATCH')
                         @csrf
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-6 offset-3">
                                     <div class="form-group">
-                                        <label for="name">Key:</label> <a href="" data-toggle="popover" class="float-right" title="{{__('key_information')}}" data-content="{{__('key_info_popover')}}"><i class="fas fa-question"></i></a>
-                                        <input type="text" class="form-control key" id="key" name="key" value="" required>
+                                        <label for="name">Key:</label> <a href="#" data-toggle="edit_popover" class="float-right" title="{{__('key_information')}}" data-content="{{__('key_info_popover')}}"><i class="fas fa-question"></i></a>
+                                        <input type="text" class="form-control key" id="edit_key" name="edit_key" value="" required>
                                     </div>
                                 </div>
                             </div>
@@ -256,7 +255,9 @@
 
 $(document).ready(function(){
 
-    $('[data-toggle="popover"]').popover();  
+    $('[data-toggle="popover"]').popover({html:true});  
+
+    $('[data-toggle="edit_popover"]').popover({html:true});  
 
     $("#table").DataTable({
             language: {

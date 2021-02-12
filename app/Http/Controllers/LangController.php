@@ -109,7 +109,7 @@ class LangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update_translate(Request $request)
     {
 
         $input = $request->all();
@@ -119,12 +119,12 @@ class LangController extends Controller
         foreach($languages as $lang) {
             //insertar en los json
             $data = $this->openJSONFile($lang);
-            $data[$input['key']] = $input[$lang];
+            $data[$input['edit_key']] = $input[$lang];
             $this->saveJSONFile($lang, $data);
 
             //insertar en los array
             $data = $this->openArrayFile($lang);
-            $data[$input['key']] = $input[$lang];
+            $data[$input['edit_key']] = $input[$lang];
             $this->saveArrayFile($lang, $data);
             
         }
